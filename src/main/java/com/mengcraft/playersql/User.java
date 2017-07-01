@@ -44,6 +44,109 @@ public class User {
     @UpdatedTimestamp
     private Timestamp lastUpdate;
 
+    public String getResearchCompleted() {
+        return researchCompleted;
+    }
+
+    public void setResearchCompleted(String researchCompleted) {
+        this.researchCompleted = researchCompleted;
+    }
+
+    public String getObjectsScanned() {
+        return objectsScanned;
+    }
+
+    public void setObjectsScanned(String objectsScanned) {
+        this.objectsScanned = objectsScanned;
+    }
+
+    public String getEntitiesScanned() {
+        return entitiesScanned;
+    }
+
+    public void setEntitiesScanned(String entitiesScanned) {
+        this.entitiesScanned = entitiesScanned;
+    }
+
+    public String getPhenomenaScanned() {
+        return phenomenaScanned;
+    }
+
+    public void setPhenomenaScanned(String phenomenaScanned) {
+        this.phenomenaScanned = phenomenaScanned;
+    }
+
+    @Column(columnDefinition = "TEXT")
+    private String researchCompleted;
+
+    public String getKnownAspects() {
+        return knownAspects;
+    }
+
+    public void setKnownAspects(String knownAspects) {
+        this.knownAspects = knownAspects;
+    }
+
+    @Column(columnDefinition = "TEXT")
+    private String knownAspects;
+    @Column(columnDefinition = "TEXT")
+    private String objectsScanned;
+    @Column(columnDefinition = "TEXT")
+    private String entitiesScanned;
+    @Column(columnDefinition = "TEXT")
+    private String phenomenaScanned;
+
+    public int getWarpCount() {
+        return warpCount;
+    }
+
+    public void setWarpCount(int warpCount) {
+        this.warpCount = warpCount;
+    }
+
+    public int getWarp() {
+        return warp;
+    }
+
+    public void setWarp(int warp) {
+        this.warp = warp;
+    }
+
+    public int getWarpSticky() {
+        return warpSticky;
+    }
+
+    public void setWarpSticky(int warpSticky) {
+        this.warpSticky = warpSticky;
+    }
+
+    public int getWarpTemp() {
+        return warpTemp;
+    }
+
+    public void setWarpTemp(int warpTemp) {
+        this.warpTemp = warpTemp;
+    }
+
+    @Column(columnDefinition = "TEXT")
+    private int warpCount;
+    @Column(columnDefinition = "TEXT")
+    private int warp;
+    @Column(columnDefinition = "TEXT")
+    private int warpSticky;
+    @Column(columnDefinition = "TEXT")
+    private int warpTemp;
+
+    public String getBaules() {
+        return Baules;
+    }
+
+    public void setBaules(String baules) {
+        Baules = baules;
+    }
+
+    @Column(columnDefinition = "TEXT")
+    private String Baules;
     public UUID getUuid() {
         return uuid;
     }

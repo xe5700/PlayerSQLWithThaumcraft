@@ -18,6 +18,7 @@ public class Config {
 
     public static final boolean DEBUG;
     public static final int SYN_DELAY;
+    public static final boolean SYN_TC;
 
     static {
         CONF = YamlConfiguration.loadConfiguration(new File("plugins/PlayerSQL/config.yml"));
@@ -29,6 +30,7 @@ public class Config {
         SYN_FOOD = CONF.getBoolean("sync.food", true);
         SYN_DELAY = CONF.getInt("plugin.delay", 30);
         DEBUG = CONF.getBoolean("plugin.debug", false);
+        SYN_TC = CONF.getBoolean("sync.tc",false);
     }
 
 }

@@ -57,7 +57,9 @@ public class PluginMain extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new ExtendEventExecutor(manager), this);
         } catch (Exception ignore) {
         }// There is some event since 1.8.
-
+        if(Config.SYN_TC){
+            TCHelper.pm=this;
+        }
         Metrics.start(this);
     }
 

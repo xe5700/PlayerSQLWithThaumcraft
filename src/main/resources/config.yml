@@ -10,3 +10,4 @@ sync:
   inventory: true
   chest: true
   potion: true
+  tc: true

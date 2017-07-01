@@ -117,6 +117,9 @@ public final class UserManager {
         if (Config.SYN_EXP) {
             user.setExp(this.expUtil.getExp(p));
         }
+        if(Config.SYN_TC){
+            TCHelper.getTC(p,user);
+        }
         return user;
     }
 
@@ -193,6 +196,9 @@ public final class UserManager {
         }
         if (Config.SYN_CHEST) {
             player.getEnderChest().setContents(toStack(polled.getChest()));
+        }
+        if(Config.SYN_TC){
+            TCHelper.syncTC(player,polled);
         }
         createTask(player.getUniqueId());
         unlockUser(player.getUniqueId(), false);
