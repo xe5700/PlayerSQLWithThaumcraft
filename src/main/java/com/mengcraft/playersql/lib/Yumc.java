@@ -254,7 +254,7 @@ public class Yumc {
     private void postPlugin() throws IOException {
         // 服务器数据获取
         final PluginDescriptionFile description = plugin.getDescription();
-        final String pluginname = description.getName()+"WithThaumcraft";
+        final String pluginname = description.getName();
         final String tmposarch = System.getProperty("os.arch");
 
         final Map<String, Object> data = new HashMap<>();
