@@ -144,7 +144,7 @@ public class TCHelper {
     }
     public static void getTC(Player p,User user){
         final Object o=new Object();
-        pm.runTask(()-> {
+        pm.run(()-> {
             synchronized (o) {
                 user.setResearchCompleted(TCHelper.getCompletedResearch(p));
                 user.setKnownAspects(TCHelper.getKnownAspects(p));
@@ -164,7 +164,7 @@ public class TCHelper {
     }
     public static void syncTC(Player p, User u){
         final Object o=new Object();
-        pm.runTask(()-> {
+        pm.run(()-> {
             synchronized (o) {
                 String pn = p.getName();
                 if (!u.getResearchCompleted().equals("")) {

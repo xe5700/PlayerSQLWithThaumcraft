@@ -11,3 +11,6 @@ sync:
   chest: true
   potion: true
   tc: true
+
+kick-load-failed: true
+kick-load-message: Your game data loading error, please contact the operator

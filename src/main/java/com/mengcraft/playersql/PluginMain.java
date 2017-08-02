@@ -1,17 +1,14 @@
 package com.mengcraft.playersql;
 
-import com.mengcraft.playersql.lib.ExpUtil;
-import com.mengcraft.playersql.lib.ExpUtilHandler;
-import com.mengcraft.playersql.lib.ItemUtil;
-import com.mengcraft.playersql.lib.ItemUtilHandler;
-import com.mengcraft.playersql.lib.Metrics;
+import com.mengcraft.playersql.lib.*;
 import com.mengcraft.simpleorm.EbeanHandler;
 import com.mengcraft.simpleorm.EbeanManager;
+import com.mengcraft.simpleorm.ORM;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 
 /**
@@ -27,6 +24,8 @@ public class PluginMain extends JavaPlugin {
         ItemUtil itemUtil = new ItemUtilHandler(this).handle();
         ExpUtil expUtil = new ExpUtilHandler(this).handle();
 
+        ORM.loadLibrary(this);
+
         EbeanHandler db = EbeanManager.DEFAULT.getHandler(this);
         if (db.isNotInitialized()) {
             db.define(User.class);
@@ -40,7 +39,6 @@ public class PluginMain extends JavaPlugin {
         }
 
         db.install();
-//        db.reflect();
 
         UserManager manager = UserManager.INSTANCE;
         manager.setMain(this);
@@ -61,6 +59,7 @@ public class PluginMain extends JavaPlugin {
             TCHelper.pm=this;
         }
         Metrics.start(this);
+        new Yumc(this);
     }
 
     @Override
@@ -74,28 +73,24 @@ public class PluginMain extends JavaPlugin {
         return getServer().getPlayer(uuid);
     }
 
-    public void info(Exception e) {
-        getLogger().log(Level.WARNING, e.toString(), e);
+    public void log(Exception e) {
+        getLogger().log(Level.SEVERE, e.toString(), e);
     }
 
-    public void info(String info) {
+    public void log(String info) {
         getLogger().info(info);
     }
 
-    public BukkitTask runTaskTimerAsynchronously(Runnable r, int i) {
-        return getServer().getScheduler().runTaskTimerAsynchronously(this, r, i, i);
+    public void runAsync(Runnable r) {
+        CompletableFuture.runAsync(r);
     }
 
-    public BukkitTask runTaskAsynchronously(Runnable r) {
-        return getServer().getScheduler().runTaskAsynchronously(this, r);
+    public void run(Runnable r) {
+        getServer().getScheduler().runTask(this, r);
     }
 
-    public BukkitTask runTask(Runnable r) {
-        return getServer().getScheduler().runTask(this, r);
-    }
-
-    public BukkitTask runTaskTimer(Runnable r, int i) {
-        return getServer().getScheduler().runTaskTimer(this, r, i, i);
+    public static void thr(boolean b, String message) {
+        if (b) throw new IllegalStateException(message);
     }
 
     public static boolean nil(Object i) {

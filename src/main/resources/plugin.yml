@@ -1,7 +1,10 @@
 main: com.mengcraft.playersql.PluginMain
 name: PlayerSQL
-version: ${project.version}@MagickCraft-With-TC
+version: ${project.version}
 website: http://www.spigotmc.org/resources/playersql.552/
 author: caoli5288@gmail.com
+authors:
+- caoli5288
+- xjboss
 
 softdepend: ["ProtocolLib"]
