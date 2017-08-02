@@ -57,13 +57,6 @@
             <artifactId>Forge</artifactId>
             <version>1614</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/forge-1.7.10-10.13.4.1614-1.7.10-patched.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>net.Forge</groupId>
-            <artifactId>Forge</artifactId>
-            <version>1614</version>
-            <scope>system</scope>
             <systemPath>${project.basedir}/lib/forgeBin-1.7.10-10.13.4.1614-1.7.10.jar</systemPath>
         </dependency>
         <dependency>
