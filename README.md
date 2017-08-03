@@ -1,4 +1,4 @@
-[![Build Status](http://ci.mengcraft.com:8080/job/PlayerSQL/badge/icon)](http://ci.mengcraft.com:8080/job/PlayerSQL/)
+[![Build Status](https://ci.xjboss.net/job/PlayerSQLWithThaumcraft/badge/icon)](https://ci.xjboss.net/job/PlayerSQLWithThaumcraft/)
 
 ****
 
@@ -12,6 +12,8 @@ PlayerSQL
 - 饥饿值
 - 末影箱
 - 药效果
+- 神秘研究
+- 神秘饰品
 
 事件管理器
 --------
