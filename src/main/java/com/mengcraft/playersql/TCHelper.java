@@ -144,7 +144,7 @@ public class TCHelper {
     }
     public static void getTC(Player p,User user){
         final Object o=new Object();
-        pm.run(()-> {
+        Runnable r=()-> {
             synchronized (o) {
                 user.setResearchCompleted(TCHelper.getCompletedResearch(p));
                 user.setKnownAspects(TCHelper.getKnownAspects(p));
@@ -159,12 +159,18 @@ public class TCHelper {
                 user.setWarpTemp((i = TCHelper.proxy.getPlayerKnowledge().warpTemp.get(pn)) != null ? i : 0);
                 user.setBaules(TCHelper.getBaules(p));
             }
-        });
-        synchronized (o){return;}
+        };
+        if(pm.shutdown){
+            r.run();
+        }else {
+            pm.run(r);
+            synchronized (o){return;}
+        }
     }
     public static void syncTC(Player p, User u){
         final Object o=new Object();
-        pm.run(()-> {
+
+        Runnable r=()-> {
             synchronized (o) {
                 String pn = p.getName();
                 if (!u.getResearchCompleted().equals("")) {
@@ -259,9 +265,14 @@ public class TCHelper {
                     }
                 }while (false);
             }
-        });
-        synchronized (o){
-            return;
+        };
+        if(pm.shutdown){
+            r.run();
+        }else {
+            pm.run(r);
+            synchronized (o) {
+                return;
+            }
         }
     }
 }

@@ -61,9 +61,10 @@ public class PluginMain extends JavaPlugin {
         Metrics.start(this);
         new Yumc(this);
     }
-
+    public boolean shutdown=false;
     @Override
     public void onDisable() {
+        shutdown=true;
         for (Player p : getServer().getOnlinePlayers()) {
             UserManager.INSTANCE.saveUser(p, false);
         }
