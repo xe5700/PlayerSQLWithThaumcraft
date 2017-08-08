@@ -158,13 +158,20 @@ public class TCHelper {
                 user.setWarpSticky((i = TCHelper.proxy.getPlayerKnowledge().warpSticky.get(pn)) != null ? i : 0);
                 user.setWarpTemp((i = TCHelper.proxy.getPlayerKnowledge().warpTemp.get(pn)) != null ? i : 0);
                 user.setBaules(TCHelper.getBaules(p));
+                o.notifyAll();
             }
         };
         if(pm.shutdown){
             r.run();
         }else {
             pm.run(r);
-            synchronized (o){return;}
+            synchronized (o){
+                try {
+                    o.wait();
+                }catch (Exception e) {
+                    return;
+                }
+            }
         }
     }
     public static void syncTC(Player p, User u){
@@ -246,32 +253,35 @@ public class TCHelper {
                 if (Config.DEBUG) {
                     Bukkit.getLogger().info("[PlayerSQL] set WarpCount successful");
                 }
-                do {
-                    if (!u.getBaules().equals("")) {
-                        InventoryBaubles inv=pBaules.get(pn);
-                        for(int i=0;i<inv.stackList.length;i++){
-                            inv.stackList[i]=null;
+                if (!u.getBaules().isEmpty()) {
+                    InventoryBaubles inv=pBaules.get(pn);
+                    for(int i=0;i<inv.stackList.length;i++){
+                        inv.stackList[i]=null;
+                    }
+                    try {
+                        inv.readNBT((NBTTagCompound) JsonToNBT.func_150315_a(u.getBaules()));
+                        if(Config.DEBUG){
+                            Bukkit.getLogger().info("[PlayerSQL] set baubles successful");
                         }
-                        try {
-                            inv.readNBT((NBTTagCompound) JsonToNBT.func_150315_a(u.getBaules()));
-                            if(Config.DEBUG){
-                                Bukkit.getLogger().info("[PlayerSQL] set baubles successful");
-                            }
-                        }catch (Exception e){
-                            if (Config.DEBUG) {
-                                e.printStackTrace();
-                            }
+                    }catch (Exception e){
+                        if (Config.DEBUG) {
+                            e.printStackTrace();
                         }
                     }
-                }while (false);
+                }
+                o.notifyAll();
             }
         };
         if(pm.shutdown){
             r.run();
         }else {
             pm.run(r);
-            synchronized (o) {
-                return;
+            synchronized (o){
+                try {
+                    o.wait();
+                }catch (Exception e) {
+                    return;
+                }
             }
         }
     }
